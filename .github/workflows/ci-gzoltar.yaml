@@ -1,5 +1,5 @@
 ---
-name: Java CI
+name: GZoltar Java CI
 
 on: [push, pull_request]
 
