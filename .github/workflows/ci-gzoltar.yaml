@@ -38,9 +38,11 @@ jobs:
         run: mvn gzoltar:fl-report
       - name: Enhance GZoltar results
         uses: hugofpaiva/gzoltar-feedback-action@main
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
         with:
-            build-path: '/target/site/gzoltar'
-            sfl-ranking: '[ochiai, tarantula]'
-            sfl-threshold: '[0.75, 0.85]'
-            sfl-ranking-order: 'ochiai'
-            upload-artifacts: true
+          build-path: "/target/site/gzoltar"
+          sfl-ranking: "[ochiai, tarantula]"
+          sfl-threshold: "[0.75, 0.85]"
+          sfl-ranking-order: "ochiai"
+          upload-artifacts: true
