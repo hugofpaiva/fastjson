@@ -45,7 +45,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=16384"
         with:
           build-path: "/target/site/gzoltar"
-          sfl-ranking: "[ochiai, tarantula]"
-          sfl-threshold: "[0.75, 0.85]"
+          sfl-ranking: "[ochiai]"
+          sfl-threshold: "[0.5]"
           sfl-ranking-order: "ochiai"
           upload-artifacts: true
