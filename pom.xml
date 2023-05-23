@@ -223,17 +223,12 @@
 								<flFamily>
 									<name>sfL</name>
 									<formulas>
-										<formula>barinel</formula>
-										<formula>dstar</formula>
 										<formula>ochiai</formula>
-										<formula>tarantula</formula>
-										<!--<formula>...</formula>-->
 									</formulas>
 									<metrics>
 										<metric>rho</metric>
 										<metric>ambiguity</metric>
 										<metric>entropy</metric>
-										<!--<metric>...</metric>-->
 									</metrics>
 									<formatters>
 										<format
@@ -243,7 +238,6 @@
 											<htmlViews>
 												<htmlView>sunburst</htmlView>
 												<htmlView>vertical_partition</htmlView>
-												<!--<htmlView>...</htmlView>-->
 											</htmlViews>
 										</format>
 									</formatters>
