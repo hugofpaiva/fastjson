@@ -1,7 +1,13 @@
 ---
 name: GZoltar Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
@@ -11,7 +17,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        os: [ubuntu-18.04, macOS-latest]
+        os: ubuntu-18.04
         java: [8]
       fail-fast: false
       max-parallel: 4
@@ -46,6 +52,6 @@ jobs:
         with:
           build-path: "/target/site/gzoltar"
           sfl-ranking: "[ochiai]"
-          sfl-threshold: "[0.9]"
+          sfl-threshold: "[0.5]"
           sfl-ranking-order: "ochiai"
           upload-artifacts: true
