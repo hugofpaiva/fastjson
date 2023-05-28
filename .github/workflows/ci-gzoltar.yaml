@@ -1,0 +1,47 @@
+---
+name: GZoltar Java CI
+
+on:
+  push:
+    branches:
+      - example/gzoltar
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    name: Test JDK 8, ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-maven-modules
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}
+      - name: Compile Tests with Maven
+        run: mvn clean test-compile
+      - name: Test with Maven and GZoltar
+        run: mvn -P gzoltar-sufire gzoltar:prepare-agent test
+      - name: Generate GZoltar report
+        run: mvn gzoltar:fl-report
+      - name: Enhance GZoltar results
+        uses: GZoltar/gzoltar-feedback-action@main
+        env:
+          NODE_OPTIONS: "--max-old-space-size=16384"
+        with:
+          build-path: "/target/site/gzoltar"
+          sfl-ranking: "[ochiai]"
+          sfl-threshold: "[0.5]"
+          sfl-ranking-order: "ochiai"
+          upload-artifacts: true
